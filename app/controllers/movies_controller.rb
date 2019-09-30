@@ -42,4 +42,8 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def sort
+    #needs to sort based on movie param
+  end
+
 end
