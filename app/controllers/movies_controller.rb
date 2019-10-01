@@ -52,6 +52,6 @@ class MoviesController < ApplicationController
     else
       return nil
     end
-   end
+  end
 
 end
