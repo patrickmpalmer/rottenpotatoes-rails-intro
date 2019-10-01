@@ -18,17 +18,6 @@ class MoviesController < ApplicationController
     # default: render 'new' template
   end
 
-  module MoviesHelper
-    helper_method :helper_class
-    def helper_class(table_header)
-      if(params[:sort].to_s == table_header)
-        return 'hilite'
-      else
-        return nil
-      end
-    end
-  end
-
   def create
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
