@@ -11,4 +11,12 @@ module MoviesHelper
       return nil
     end
   end
+
+  def sort(movie)
+    if(params[:sort].to_s == 'title')
+     return movie.title
+    elsif(params[:sort].to_s == 'release')
+     return movie.release_date.to_s
+    end 
+  end
 end
