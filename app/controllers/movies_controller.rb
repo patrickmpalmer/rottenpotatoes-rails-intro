@@ -46,4 +46,12 @@ class MoviesController < ApplicationController
     #needs to sort based on movie param
   end
 
+  def helper_class(table_header)
+    if(params[:sort].to_s == table_header)
+      return 'hilite'
+    else
+      return nil
+    end
+   end
+
 end
