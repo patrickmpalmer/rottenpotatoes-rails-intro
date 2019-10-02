@@ -36,6 +36,16 @@ class MoviesController < ApplicationController
         @selected_ratings[rating] = params[:ratings].has_key?(rating)
       end
     }
+
+    #remember session details for refresh
+    if(session.has_key?(:sort) || session.has_key?(:ratings))
+      if(session.has_key?(:sort))
+        params[:sort] = session[:sort]
+      if(session.has_key?(:ratings))
+        params[:ratings] = session[:ratings]
+      end
+      redirect_to movies_path(:sort=>params[:sort], :ratings=>params[:ratings])
+    end
   end
 
   def new
