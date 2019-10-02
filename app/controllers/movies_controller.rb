@@ -14,6 +14,12 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @restore_session=0
 
+    #reset session if user clicks rotten potatoes title
+    if(params[:sort].to_s == 'reset')
+      session.clear
+    end
+
+
     # sorting section
     if(params[:sort].to_s == 'title')
       session[:sort] = params[:sort]
