@@ -20,7 +20,7 @@ module MoviesHelper
     end 
   end
 
-  def select(rating)
+  def raitings(rating)
     if(params[:ratings] == nil)
      return false
     end
