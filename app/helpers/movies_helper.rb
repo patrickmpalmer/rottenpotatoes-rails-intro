@@ -19,4 +19,11 @@ module MoviesHelper
      return movie.release_date.to_s
     end 
   end
+
+  def select(rating)
+    if(params[:ratings] == nil)
+     return false
+    end
+   return params[:ratings].has_key?(rating)
+  end
 end
