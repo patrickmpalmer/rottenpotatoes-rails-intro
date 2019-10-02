@@ -25,11 +25,12 @@ class MoviesController < ApplicationController
     @all_ratings =  ['G','PG','PG-13','R']
     @selected_ratings = {}
     @all_ratings.each { |rating|
-    if params[:ratings] == nil
-      @selected_ratings[rating] = false
-    else
-      @selected_ratings[rating] = params[:ratings].has_key?(rating)
-    end
+      if params[:ratings] == nil
+        @selected_ratings[rating] = false
+      else
+        @selected_ratings[rating] = params[:ratings].has_key?(rating)
+      end
+    }
   end
 
   def new
