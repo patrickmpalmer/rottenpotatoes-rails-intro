@@ -22,6 +22,11 @@ class MoviesController < ApplicationController
     end
 
      # rating filter section
+    if(params[:ratings] != nil)
+      session[:ratings] = params[:ratings]
+      @movies = @movies.find_all{ |m| params[:ratings].has_key?(m.rating) }
+    end
+
     @all_ratings =  ['G','PG','PG-13','R']
     @selected_ratings = {}
     @all_ratings.each { |rating|
