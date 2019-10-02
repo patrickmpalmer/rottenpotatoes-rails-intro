@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    # sorting section
     if(params[:sort].to_s == 'title')
       session[:sort] = params[:sort]
       @movies = @movies.sort_by{|m| m.title }
@@ -19,6 +20,11 @@ class MoviesController < ApplicationController
       session[:sort] = params[:sort]
       @movies = @movies.sort_by{|m| m.release_date.to_s }
      end
+
+     # rating filter section
+     @all_ratings =  ['G','PG','PG-13','R']
+     @selected_ratings = {}
+     
   end
 
   def new
