@@ -21,12 +21,18 @@ class MoviesController < ApplicationController
     elsif(params[:sort].to_s == 'release')
       session[:sort] = params[:sort]
       @movies = @movies.sort_by{|m| m.release_date.to_s }
+    elsif(session.has_key?(:sort))
+      params[:sort] = session[:sort]
+      @restore_session=1
     end
 
     # rating filter section
     if(params[:ratings] != nil)
       session[:ratings] = params[:ratings]
       @movies = @movies.find_all{ |m| params[:ratings].has_key?(m.rating) }
+    elsif(session.has_key?(:ratings))
+      params[:ratings] = session[:ratings]
+      @restore_session=1
     end
 
     @all_ratings =  ['G','PG','PG-13','R']
@@ -38,6 +44,10 @@ class MoviesController < ApplicationController
         @selected_ratings[rating] = params[:ratings].has_key?(rating)
       end
     }
+
+    if(@restore_session==1)
+      redirect_to movies_path(:sort=>params[:sort], :ratings=>params[:ratings])
+    end
 
     #remember session details for refresh
     #if(session.has_key?(:sort) || session.has_key?(:ratings))
