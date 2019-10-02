@@ -16,20 +16,20 @@ class MoviesController < ApplicationController
     if(params[:sort].to_s == 'title')
       session[:sort] = params[:sort]
       @movies = @movies.sort_by{|m| m.title }
-     elsif(params[:sort].to_s == 'release')
+    elsif(params[:sort].to_s == 'release')
       session[:sort] = params[:sort]
       @movies = @movies.sort_by{|m| m.release_date.to_s }
-     end
+    end
 
      # rating filter section
-     @all_ratings =  ['G','PG','PG-13','R']
-     @selected_ratings = {}
-     @all_ratings.each { |rating|
-      if params[:ratings] == nil
-        @selected_ratings[rating] = false
-      else
-        @selected_ratings[rating] = params[:ratings].has_key?(rating)
-      end
+    @all_ratings =  ['G','PG','PG-13','R']
+    @selected_ratings = {}
+    @all_ratings.each { |rating|
+    if params[:ratings] == nil
+      @selected_ratings[rating] = false
+    else
+      @selected_ratings[rating] = params[:ratings].has_key?(rating)
+    end
   end
 
   def new
