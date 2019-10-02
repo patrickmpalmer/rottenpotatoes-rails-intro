@@ -19,7 +19,6 @@ class MoviesController < ApplicationController
       session.clear
     end
 
-
     # sorting section
     if(params[:sort].to_s == 'title')
       session[:sort] = params[:sort]
@@ -51,19 +50,10 @@ class MoviesController < ApplicationController
       end
     }
 
+    # restore session
     if(@restore_session==1)
       redirect_to movies_path(:sort=>params[:sort], :ratings=>params[:ratings])
     end
-
-    #remember session details for refresh
-    #if(session.has_key?(:sort) || session.has_key?(:ratings))
-    #  if(session.has_key?(:sort))
-    #    params[:sort] = session[:sort]
-    #  if(session.has_key?(:ratings))
-    #    params[:ratings] = session[:ratings]
-    #  end
-    #  redirect_to movies_path(:sort=>params[:sort], :ratings=>params[:ratings])
-    #end
   end
 
   def new
@@ -93,9 +83,4 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
-
-  def sort
-    #needs to sort based on movie param
-  end
-
 end
