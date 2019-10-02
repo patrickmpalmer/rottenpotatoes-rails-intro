@@ -12,6 +12,8 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @restore_session=0
+
     # sorting section
     if(params[:sort].to_s == 'title')
       session[:sort] = params[:sort]
@@ -21,7 +23,7 @@ class MoviesController < ApplicationController
       @movies = @movies.sort_by{|m| m.release_date.to_s }
     end
 
-     # rating filter section
+    # rating filter section
     if(params[:ratings] != nil)
       session[:ratings] = params[:ratings]
       @movies = @movies.find_all{ |m| params[:ratings].has_key?(m.rating) }
@@ -38,14 +40,14 @@ class MoviesController < ApplicationController
     }
 
     #remember session details for refresh
-    if(session.has_key?(:sort) || session.has_key?(:ratings))
-      if(session.has_key?(:sort))
-        params[:sort] = session[:sort]
-      if(session.has_key?(:ratings))
-        params[:ratings] = session[:ratings]
-      end
-      redirect_to movies_path(:sort=>params[:sort], :ratings=>params[:ratings])
-    end
+    #if(session.has_key?(:sort) || session.has_key?(:ratings))
+    #  if(session.has_key?(:sort))
+    #    params[:sort] = session[:sort]
+    #  if(session.has_key?(:ratings))
+    #    params[:ratings] = session[:ratings]
+    #  end
+    #  redirect_to movies_path(:sort=>params[:sort], :ratings=>params[:ratings])
+    #end
   end
 
   def new
